@@ -24,7 +24,7 @@ ENV BUNDLE_GEMFILE=/app/Gemfile \
 ENV PATH="${BUNDLE_BIN}:${PATH}"
 
 # install specific version of bundler
-RUN gem install bundler -v 2.3
+RUN gem install bundler -v 2.4.5
 
 # keep Gemfile updated
 ARG CACHEBUST=1
