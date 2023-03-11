@@ -42,6 +42,8 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem "rspec-rails", "~> 6.0"
+  gem "rubocop", "~> 1.48"
+  gem "reek", "~> 6.1"
 end
 
 group :development do
@@ -49,3 +51,5 @@ group :development do
   gem "spring"
   gem "yard", "~> 0.9.28"
 end
+
+
