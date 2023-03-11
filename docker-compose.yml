@@ -1,0 +1,88 @@
+version: "3.7"
+name: google_scrapper_backend
+services:
+  postgres:
+    image: postgres:12
+    environment:
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: google_scrapper_backend_development
+    volumes:
+      - "postgres:/var/lib/postgresql/data"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  redis:
+    image: redis:6.2-alpine
+    volumes:
+      - "redis:/data"
+  backend:
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bash -c "rm -rf tmp/pids/server.pid && bundle exec rails s -b 0.0.0.0 -p 3000"
+    ports:
+      - "3001:3000"
+    volumes:
+      - "bundle_cache:/bundle"
+      - ".:/app"
+      - ".env:/app/.env"
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432
+      DISABLE_SPRING: 1
+    stdin_open: true
+    tty: true
+  worker:
+    depends_on:
+      - "postgres"
+      - "redis"
+      - "backend"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    volumes:
+      - "bundle_cache:/bundle"
+      - ".:/app"
+      - ".env:/app/.env"
+    entrypoint: ""
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432
+      DISABLE_SPRING: 1
+    stdin_open: true
+    tty: true
+  spring:
+    depends_on:
+      - "postgres"
+      - "redis"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - "bundle_cache:/bundle"
+      - ".:/app"
+      - .env:/app/.env
+    entrypoint: ""
+    environment:
+      REDIS_URL: redis://redis:6379/0
+      DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432
+    command: bash -c "umask a+rw; bundle exec spring server"
+
+    # This ensures that the pid namespace is shared between the host
+    # and the container. It's not necessary to be able to run spring
+    # commands, but it is necessary for "spring status" and "spring stop"
+    # to work properly.
+    pid: host
+
+volumes:
+  redis:
+  postgres:
+  bundle_cache:
