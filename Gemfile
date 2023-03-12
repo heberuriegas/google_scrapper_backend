@@ -47,6 +47,7 @@ group :development, :test do
   gem "guard", "~> 2.18"
   gem "guard-rspec", "~> 4.7"
   gem "guard-yard", "~> 2.2"
+  gem "database_cleaner-active_record", "~> 2.1"
 end
 
 group :development do
