@@ -49,6 +49,7 @@ group :development, :test do
   gem "guard-yard", "~> 2.2"
   gem "database_cleaner-active_record", "~> 2.1"
   gem "simplecov", "~> 0.22.0"
+  gem "webmock", "~> 3.18"
 end
 
 group :development do
