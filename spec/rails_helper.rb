@@ -69,4 +69,7 @@ RSpec.configure do |config|
   config.before(:each, js: true) { DatabaseCleaner.strategy = :truncation }
   config.before(:each) { DatabaseCleaner.start }
   config.after(:each) { DatabaseCleaner.clean }
+
+  # Factory bot
+  config.include FactoryBot::Syntax::Methods
 end
