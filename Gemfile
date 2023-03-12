@@ -48,7 +48,7 @@ group :development, :test do
   gem "guard-rspec", "~> 4.7"
   gem "guard-yard", "~> 2.2"
   gem "database_cleaner-active_record", "~> 2.1"
-  gem "simplecov", "~> 0.22.0"
+  gem "simplecov", "~> 0.22.0", require: false
   gem "webmock", "~> 3.18"
   gem "factory_bot_rails", "~> 6.2"
 end
