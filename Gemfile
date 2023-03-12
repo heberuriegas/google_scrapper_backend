@@ -51,6 +51,7 @@ group :development, :test do
   gem "simplecov", "~> 0.22.0", require: false
   gem "webmock", "~> 3.18"
   gem "factory_bot_rails", "~> 6.2"
+  gem "ffaker", "~> 2.21"
 end
 
 group :development do
