@@ -48,6 +48,7 @@ group :development, :test do
   gem "guard-rspec", "~> 4.7"
   gem "guard-yard", "~> 2.2"
   gem "database_cleaner-active_record", "~> 2.1"
+  gem "simplecov", "~> 0.22.0"
 end
 
 group :development do
