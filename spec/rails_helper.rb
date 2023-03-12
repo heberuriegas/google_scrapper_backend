@@ -65,6 +65,7 @@ RSpec.configure do |config|
   DatabaseCleaner.allow_remote_database_url = true
   config.before(:suite) { DatabaseCleaner.clean_with(:truncation) }
   config.before(:each) { DatabaseCleaner.strategy = :transaction }
+  config.before(:each) { ActiveJob::Base.queue_adapter = :test }
   config.before(:each, js: true) { DatabaseCleaner.strategy = :truncation }
   config.before(:each) { DatabaseCleaner.start }
   config.after(:each) { DatabaseCleaner.clean }
