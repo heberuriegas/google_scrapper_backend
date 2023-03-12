@@ -44,6 +44,9 @@ group :development, :test do
   gem "rspec-rails", "~> 6.0"
   gem "rubocop", "~> 1.48"
   gem "reek", "~> 6.1"
+  gem "guard", "~> 2.18"
+  gem "guard-rspec", "~> 4.7"
+  gem "guard-yard", "~> 2.2"
 end
 
 group :development do
@@ -51,5 +54,3 @@ group :development do
   gem "spring"
   gem "yard", "~> 0.9.28"
 end
-
-
