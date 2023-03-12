@@ -45,7 +45,8 @@ RSpec.describe 'POST /users', type: :request do
       end
 
       it 'includes Access-Control-Expose-Headers' do
-        expect(@headers['Access-Control-Expose-Headers']).to eq('Token-Type, Access-Token, Expires-In, Refresh-Token, Created-At')
+        expose_headers = 'Token-Type, Access-Token, Expires-In, Refresh-Token, Created-At'
+        expect(@headers['Access-Control-Expose-Headers']).to eq(expose_headers)
       end
     end
   end

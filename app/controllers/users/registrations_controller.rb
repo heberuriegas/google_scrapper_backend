@@ -40,8 +40,8 @@ module Users
       respond_with resource
     end
 
-    # Will add credentials (token type, access control, etc) to headers. It also includes Access-Control-Expose-Headers to
-    # allow automatic sign in after sign up
+    # Will add credentials (token type, access control, etc) to headers.
+    # It also includes Access-Control-Expose-Headers to allow automatic sign in after sign up
     def add_credentials_headers
       access_control_headers = []
       credentials.each do |header, value|
