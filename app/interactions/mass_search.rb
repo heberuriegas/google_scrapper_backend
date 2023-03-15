@@ -2,12 +2,15 @@
 
 require 'fileutils'
 
-# Will extract info from the first page
+# Extract info from the first page
 class MassSearch < ActiveInteraction::Base
+  include Keywords
+
   attr_reader :temp_dir
 
   array :keywords
 
+  # Create a temp
   def execute
     @temp_dir = mass_search
 
@@ -19,18 +22,20 @@ class MassSearch < ActiveInteraction::Base
 
   private
 
+  # Create a keyword search database record for each keyword
   def create_keyword_searches
     keywords.each do |keyword|
-      # TODO: Improve this
-      keyword = keyword.gsub(/[^0-9A-Za-z]/, '')
+      keyword = escape_keyword(keyword)
       CreateKeywordSearch.run(path: "file://#{temp_dir}/#{keyword}.html")
     end
   end
 
+  # Avoid unintentional bash argument
   def escaped_words
-    keywords.map { |keyword| keyword.gsub(/[^0-9A-Za-z]/, '') }
+    keywords.map { |keyword| escape_keyword(keyword) }
   end
 
+  # Create a string with a breakline for each keyword
   def mass_search_input
     escaped_words.join("\n")
   end
@@ -40,12 +45,13 @@ class MassSearch < ActiveInteraction::Base
     Rails.root.join('scripts', 'mass_search')
   end
 
-  # Will search keywords in google
-  # @return [String] A temp dir with google search html files downloaded
+  # Search keywords in the first page of google
+  # and create a tempdir with the html results in it
   def mass_search
     `echo "#{mass_search_input}" | xargs #{mass_search_path}`.gsub("\n", '')
   end
 
+  # Clear the tempdir created with the mass_search binary
   def clear_temp_dir
     FileUtils.rm_rf(temp_dir)
   end
