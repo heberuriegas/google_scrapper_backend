@@ -26,7 +26,7 @@ class MassSearch < ActiveInteraction::Base
   def create_keyword_searches
     keywords.each do |keyword|
       keyword = escape_keyword(keyword)
-      CreateKeywordSearch.run(path: "file://#{temp_dir}/#{keyword}.html")
+      CreateKeywordSearch.run(keyword:, path: "file://#{temp_dir}/#{keyword}.html")
     end
   end
 

@@ -30,7 +30,7 @@ RSpec.describe MassSearch, type: :service do
       it 'create a keyword search for each keyword' do
         keywords.each do |keyword|
           keyword = escape_keyword(keyword)
-          expect(CreateKeywordSearch).to have_received(:run).with(path: "file://#{temp_dir}/#{keyword}.html")
+          expect(CreateKeywordSearch).to have_received(:run).with(keyword:, path: "file://#{temp_dir}/#{keyword}.html")
         end
       end
 

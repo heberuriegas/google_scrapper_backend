@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_12_164733) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_15_163135) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "keyword_searches", force: :cascade do |t|
+    t.string "keyword"
+    t.string "total_results"
+    t.integer "total_links"
+    t.integer "total_adwords"
+    t.text "source_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.bigint "resource_owner_id", null: false
