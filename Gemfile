@@ -58,6 +58,7 @@ group :development, :test do
   gem 'rubocop', '~> 1.48'
   gem 'simplecov', '~> 0.22.0', require: false
   gem 'webmock', '~> 3.18'
+  gem "dotenv-rails", "~> 2.8"
 end
 
 group :development do
