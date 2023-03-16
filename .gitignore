@@ -32,3 +32,6 @@
 doc
 .yardoc
 coverage
+
+# dotenv-rails
+.env
