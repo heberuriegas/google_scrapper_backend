@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
+require 'api_constraints'
+
 Rails.application.routes.draw do
-  resources :keyword_searches
   use_doorkeeper
   devise_for :users, controllers: { registrations: 'users/registrations' }
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
+  namespace :api, defaults: { format: 'json' } do
+    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
+      get '/me', to: 'credentials#me'
+      resources :keyword_searches
+    end
+  end
 end
