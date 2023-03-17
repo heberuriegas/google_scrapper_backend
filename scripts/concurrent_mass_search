@@ -1,0 +1,12 @@
+#!/bin/bash
+
+TEMP_DIR="$(mktemp -d)"
+
+for i in "$@"; do  
+  # Request processes with (almost) concurrency
+  curl https://www.google.com/search?q=$i \
+    -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36' \
+    -s -o $TEMP_DIR/$i.html &
+done
+
+echo $TEMP_DIR

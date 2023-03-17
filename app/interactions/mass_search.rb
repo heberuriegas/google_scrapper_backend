@@ -44,7 +44,8 @@ class MassSearch < ActiveInteraction::Base
 
   # :reek:UtilityFunction
   def mass_search_path
-    Rails.root.join('scripts', 'mass_search')
+    # Rails.root.join('scripts', 'random_mass_search')
+    Rails.root.join('scripts', 'concurrent_mass_search')
   end
 
   # Search keywords in the first page of google
