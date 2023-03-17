@@ -18,6 +18,8 @@ class MassSearch < ActiveInteraction::Base
 
     create_keyword_searches
     clear_temp_dir
+  rescue StandardError => e
+    errors.add(:keywords, e.message)
   end
 
   private
