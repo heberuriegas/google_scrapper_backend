@@ -6,7 +6,8 @@ module Api
   module V1
     # Read and create keyword searches
     class KeywordSearchesController < ApplicationController
-      before_action :doorkeeper_authorize!
+      before_action :doorkeeper_authorize!, except: [:show]
+      before_action :set_keyword_search, only: [:show]
       respond_to :json
 
       # GET /keyword_searches
@@ -23,7 +24,7 @@ module Api
 
       # GET /keyword_searches/1
       def show
-        render json: @keyword_search
+        render plain: @keyword_search.source_code
       end
 
       # POST /keyword_searches

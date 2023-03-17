@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
       get '/me', to: 'credentials#me'
-      resources :keyword_searches, only: %i[index create]
+      resources :keyword_searches, only: %i[index show create]
       get '/active_processes', to: 'keyword_searches#active_processes'
     end
   end
