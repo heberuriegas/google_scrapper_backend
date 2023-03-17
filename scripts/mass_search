@@ -2,9 +2,11 @@
 
 TEMP_DIR="$(mktemp -d)"
 
+UA=$(head -$((${RANDOM} % `wc -l < $(dirname "${BASH_SOURCE[0]}")/useragents.txt` + 1)) $(dirname "${BASH_SOURCE[0]}")/useragents.txt | tail -1)
+
 for i in "$@"; do  
   curl https://www.google.com/search?q=$i \
-    -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36' \
+    -A $UA \
     -s -o $TEMP_DIR/$i.html &
 done
 
