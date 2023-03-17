@@ -43,6 +43,8 @@ gem 'doorkeeper', '~> 5.6'
 gem 'sidekiq', '~> 7.0'
 gem "active_interaction", "~> 5.2"
 gem "mechanize", "~> 2.8"
+gem "active_model_serializers", "~> 0.10.13"
+gem "pusher", "~> 2.0"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -66,5 +68,3 @@ group :development do
   gem 'spring'
   gem 'yard', '~> 0.9.28'
 end
-
-gem "active_model_serializers", "~> 0.10.13"

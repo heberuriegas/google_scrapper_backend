@@ -8,6 +8,8 @@ module Api
     end
 
     rescue_from StandardError do |e|
+      Rails.log.error e.message
+      Rails.log.error e.backtrace.join("\n")
       render json: { error: e }, status: 500
     end
   end
