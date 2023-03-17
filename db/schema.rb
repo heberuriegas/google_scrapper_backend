@@ -29,7 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_163135) do
     t.bigint "application_id", null: false
     t.string "token", null: false
     t.integer "expires_in", null: false
-    t.text "redirect_uri", null: false
+    t.text "redirect_uri"
     t.string "scopes", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "revoked_at"
@@ -58,7 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_163135) do
     t.string "name", null: false
     t.string "uid", null: false
     t.string "secret", null: false
-    t.text "redirect_uri", null: false
+    t.text "redirect_uri"
     t.string "scopes", default: "", null: false
     t.boolean "confidential", default: true, null: false
     t.datetime "created_at", null: false
